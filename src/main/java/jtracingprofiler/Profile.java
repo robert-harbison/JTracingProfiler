@@ -19,10 +19,7 @@ public class Profile {
 
 	public void stop() {
 		long endTime = System.nanoTime();
-		long elapsedTime = endTime - startTime;
-		
-		System.out.println("[" + name + "] took " + elapsedTime + " nanoseconds | " + TimeUtils.convertNanoToMicroSeconds(elapsedTime) + " microseconds | " + TimeUtils.convertNanoToMilliSeconds(elapsedTime) + " milliseonds");
-		
+				
 		try {
 			new ProfileResults(name, startTime, endTime, Thread.currentThread().getId()).writeProfile();
 		} catch (IOException e) {
