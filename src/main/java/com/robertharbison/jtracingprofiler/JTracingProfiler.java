@@ -2,6 +2,9 @@ package com.robertharbison.jtracingprofiler;
 
 import java.io.File;
 
+/*
+ * Main class for interacting with and using the profiler.
+ */
 public class JTracingProfiler {
 	
 	private static ProfilerSession currentSession;
@@ -13,6 +16,7 @@ public class JTracingProfiler {
 	 * @return ProfilerSession The new session.
 	 */
 	public static ProfilerSession createProfilerSession(String name) {
+		// TODO: Allow the use of custom paths.
 		return new ProfilerSession(name, new File("profiler-" + name + ".json"));
 	}
 	
@@ -28,25 +32,25 @@ public class JTracingProfiler {
 	}
 	
 	/*
-	 * Begins a new session if one is already started it stops it then starts the new  one.
+	 * Starts a new session if one is already started it stops it then starts the new  one.
 	 * 
 	 * @param session The session to begin.
 	 */
-	public static void beginSession(ProfilerSession session) {
+	public static void startSession(ProfilerSession session) {
 		if (currentSession == null) {
 			currentSession = session;
-			session.beginSession();
+			session.startSession();
 		} else {
-			endSession();
-			beginSession(session);
+			stopSession();
+			startSession(session);
 		}
 	}
 	
 	/*
-	 * Ends the current session.
+	 * Stops the current session.
 	 */
-	public static void endSession() {
-		currentSession.endSession();
+	public static void stopSession() {
+		currentSession.stopSession();
 		currentSession = null;
 	}
 	

@@ -1,23 +1,32 @@
-JTracingProfiler is a simple Java profiler that uses Google Chrome Tracing for visualization.
+JTracingProfiler is a simple profiler library for Java that uses [Chromium tracing frame viewer](http://https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/frame-viewer "Chromium tracing frame viewer") for data visualization. 
 
+## How To Use
+#### Basic Example
+	public static void main(String[] args) {
+		/*
+		 * Creates and starts a new session with a custom name. This name is also used\
+		 * in the output files name
+		 */
+		JTracingProfiler.startSession(JTracingProfiler.createProfilerSession("example"));
 
-Supports:
-	- Threads
-	- Categories
-	- 
+		method();
 
-TODO:
-	- Way to disable profiling at compile time.
-	- Add categroy support (cat entry)
-	- Add categroy support (cat entry)
-	- Add rolling profiler files
+		// Stop the session when you are done to ensure the data gets saved correctly.
+		JTracingProfiler.stopSession();
+	}
 
-- To Test
-	- If multiple threads work correctly
-	
-	
-- To note:
-	- The line number in the profiler name is the line in which that profiler is created and not the line the method is declared on.
-	
-	
-https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit
+	public static void method() {
+		/*
+		 * Creates a new profile using the default naming scheme [file]:[method]:[line].
+		 * You can also pass in a String to use as name instead.
+		 */
+		Profile profile = new Profile();
+		
+		// [YOUR CODE HERE]
+		
+		// Stops the profiler and writes to the file.
+		profile.stop();
+	}
+
+#### Viewing Data
+Currently the data will output to a JSON file in the programs root directory. If you open up a Chromium based browser and type in [chrome://tracing/](chrome://tracing/ ""chrome://tracing/"") to the URL bar then drag the JSON file into it you will get a visual representation of the data.
