@@ -8,11 +8,13 @@ public class ProfileResults {
 	private String name;
 	private long startTime;
 	private long endTime;
+	private long threadID;
 	
-	public ProfileResults(String name, long startTime, long endTime) {
+	public ProfileResults(String name, long startTime, long endTime, long threadID) {
 		this.name = name;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.threadID = threadID;
 	}
 
 	public void writeProfile() throws IOException {
@@ -28,11 +30,15 @@ public class ProfileResults {
 		writer.write("\t\t\"name\": \"" + name + "\",\n");
 		writer.write("\t\t\"ph\": \"X\",\n");
 		writer.write("\t\t\"pid\": 0,\n");
-		writer.write("\t\t\"tid\": 0,\n");
+		writer.write("\t\t\"tid\": " + threadID + ",\n");
 		writer.write("\t\t\"ts\": " + startTime + "\n");
 		writer.write("\t}");
 		
 		writer.flush();
+	}
+	
+	public long getThreadID() {
+		return threadID;
 	}
 
 	public String getName() {

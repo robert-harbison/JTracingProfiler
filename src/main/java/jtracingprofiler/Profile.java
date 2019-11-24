@@ -7,6 +7,10 @@ public class Profile {
 	private boolean stopped;
 	private long startTime;
 	
+	public Profile() {
+		this(ProfilerUtils.profileMethod());
+	}
+	
 	public Profile(String name) {
 		this.name = name;
 		this.stopped = false;
@@ -20,7 +24,7 @@ public class Profile {
 		System.out.println("[" + name + "] took " + elapsedTime + " nanoseconds | " + TimeUtils.convertNanoToMicroSeconds(elapsedTime) + " microseconds | " + TimeUtils.convertNanoToMilliSeconds(elapsedTime) + " milliseonds");
 		
 		try {
-			new ProfileResults(name, startTime, endTime).writeProfile();
+			new ProfileResults(name, startTime, endTime, Thread.currentThread().getId()).writeProfile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
