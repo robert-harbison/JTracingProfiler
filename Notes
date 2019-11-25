@@ -5,6 +5,7 @@ TODO:
 	- Add categroy support (cat entry)
 	- Add rolling profiler files
 	- Test how expensive GLFW.getGlfwTime is
+	- Profile how expensive it is to run the profiler without profiling enabled.
 
 - To Test
 	- If multiple threads work correctly
