@@ -12,12 +12,13 @@ public class Profile {
 	private String category;
 
 	/*
-	 * Creates and starts running a profile using the default generated name following this scheme [file]:[method]:[line].
+	 * Creates and starts running a profile using the default generated name
+	 * following this scheme [file]:[method]:[line].
 	 */
 	public Profile() {
-		this(generateProfileName());
+		this(ProfilerUtils.generateProfileName());
 	}
-	
+
 	/*
 	 * Creates and starts running a profile using a custom name.
 	 * 
@@ -31,33 +32,30 @@ public class Profile {
 	 * Creates and starts running a profile using a custom name and category.
 	 * 
 	 * @param name Profile name.
+	 * 
 	 * @param categroy Category name.
 	 */
 	public Profile(String name, String category) {
-		this.name = name;
-		this.stopped = false;
-		this.startTime = System.nanoTime();
-		this.category = category;
+		if (JTracingProfiler.SHOULD_PROFILE) {
+			this.name = name;
+			this.stopped = false;
+			this.startTime = System.nanoTime();
+			this.category = category;
+		}
 	}
 
 	/*
 	 * Stops profiling and writes results to file.
 	 */
 	public void stop() {
-		long endTime = System.nanoTime();
-		ProfilerSession session = JTracingProfiler.getCurrentSession();
-		session.getFile().writeProfile(new ProfilerResults(name, startTime, endTime, Thread.currentThread().getId(), category));
-		session.incrementProfileCount();
-		stopped = true;
-	}
-	
-	
-	/*
-	 * Generates a name for the profile using this structure [file]:[method]:[line].
-	 */
-	private static final String generateProfileName() {
-		StackTraceElement trace = new Exception().getStackTrace()[2];
-		return trace.getFileName() + ":" + trace.getMethodName() + ":" + trace.getLineNumber();
+		if (JTracingProfiler.SHOULD_PROFILE) {
+			long endTime = System.nanoTime();
+
+			ProfilerSession session = JTracingProfiler.getCurrentSession();
+			session.getFile().writeProfile(new ProfilerResults(name, startTime, endTime, Thread.currentThread().getId(), category));
+			session.incrementProfileCount();
+			stopped = true;
+		}
 	}
 
 	/*

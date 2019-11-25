@@ -4,6 +4,7 @@ TODO:
 	- Add categroy support (cat entry)
 	- Add categroy support (cat entry)
 	- Add rolling profiler files
+	- Test how expensive GLFW.getGlfwTime is
 
 - To Test
 	- If multiple threads work correctly

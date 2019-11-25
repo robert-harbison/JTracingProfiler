@@ -7,6 +7,8 @@ import java.io.File;
  */
 public class JTracingProfiler {
 	
+	public static final boolean SHOULD_PROFILE = Boolean.parseBoolean(System.getProperty("profile"));
+
 	private static ProfilerSession currentSession;
 
 	/*

@@ -24,9 +24,11 @@ public class ProfilerSession {
 	 * @param outputFile The file to create and output the results to.
 	 */
 	public ProfilerSession(String name, File outputFile) {
-		this.name = name;
-		this.file = new ProfilerFile(outputFile);
-		this.profileCount = 0;
+		if (JTracingProfiler.SHOULD_PROFILE) {
+			this.name = name;
+			this.file = new ProfilerFile(outputFile);
+			this.profileCount = 0;
+		}
 	}
 	
 	/*
@@ -36,9 +38,11 @@ public class ProfilerSession {
 	 * @param outputFile The path to create and output the results to.
 	 */
 	public ProfilerSession(String name, String outputFile) {
-		this.name = name;
-		this.file = new ProfilerFile(outputFile);
-		this.profileCount = 0;
+		if (JTracingProfiler.SHOULD_PROFILE) {
+			this.name = name;
+			this.file = new ProfilerFile(outputFile);
+			this.profileCount = 0;
+		}
 	}
 
 	/*
@@ -52,7 +56,9 @@ public class ProfilerSession {
 	 * Stop the session.
 	 */
 	public void stopSession() {
-		getFile().close();
+		if (getFile() != null) {
+			getFile().close();
+		}
 		this.hasSessionStarted = false;
 	}
 
