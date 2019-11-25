@@ -1,4 +1,4 @@
-JTracingProfiler is a simple profiler library for Java that uses [Chromium tracing frame viewer](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/frame-viewer "Chromium tracing frame viewer") for data visualization. 
+JTracingProfiler is a simple profiling library for Java that uses [Chromium tracing frame viewer](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/frame-viewer "Chromium tracing frame viewer") for data visualization. 
 
 ## How To Use
 #### Basic Example
